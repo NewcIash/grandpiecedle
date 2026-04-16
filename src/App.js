@@ -149,10 +149,19 @@ const CHARS=CHARACTERS.filter((c,i,a)=>a.findIndex(x=>x.name===c.name)===i);
 
 // ─── SEEDING ───
 function getDaySeed(){const d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
-function sRand(seed){let s=seed;return()=>{s=(s*16807)%2147483647;return s/2147483647;};}
+// xorshift32 — gives well-distributed results even for consecutive seeds
+function sRand(seed){
+  let s=seed|0;if(s===0)s=1;
+  return()=>{
+    s^=s<<13;s^=s>>>17;s^=s<<5;
+    return ((s>>>0)%1000000)/1000000;
+  };
+}
 function pickDaily(mode){
-  const seed=getDaySeed()+mode.charCodeAt(0)*137+mode.length*31;
+  const seed=getDaySeed()*1000+mode.charCodeAt(0)*137+mode.length*31;
   const r=sRand(seed);
+  // warm up
+  for(let i=0;i<10;i++)r();
   let pool=CHARS;
   if(mode==="devilFruit") pool=CHARS.filter(c=>c.df!=="None"&&c.df!=="Unknown");
   if(mode==="quote") pool=CHARS.filter(c=>c.quote&&c.quote.length>0);
@@ -167,9 +176,17 @@ function compare(g,a){
   const nSt=(x,y)=>x===y?"correct":Math.abs(x-y)/Math.max(x,y,1)<.15?"close":"wrong";
   const aCmp=(x,y)=>{if(!x.length&&!y.length)return"correct";if(JSON.stringify([...x].sort())===JSON.stringify([...y].sort()))return"correct";if(x.some(v=>y.includes(v)))return"close";return"wrong";};
   const arcSt=(x,y)=>{if(x===y)return"correct";const d=Math.abs(arcIndex(x)-arcIndex(y));return d<=2?"close":"wrong";};
+  // Group/faction: show crew if the char has one, otherwise fall back to affiliation label
+  const factionLabel=c=>{
+    if(c.crew&&c.crew!=="None")return c.crew;
+    if(c.affiliation==="Marine")return "Marine";
+    if(c.affiliation==="Revolutionary")return "Révolutionnaire";
+    if(c.affiliation==="World Gov.")return "Gouvernement Mondial";
+    if(c.affiliation==="Other")return "Civil";
+    return c.affiliation;
+  };
   cols.push({l:"Genre",v:g.gender,s:eq(g.gender,a.gender)?"correct":"wrong"});
-  cols.push({l:"Affiliation",v:g.affiliation,s:eq(g.affiliation,a.affiliation)?"correct":"wrong"});
-  cols.push({l:"Équipage",v:g.crew,s:eq(g.crew,a.crew)?"correct":"wrong"});
+  cols.push({l:"Groupe",v:factionLabel(g),s:eq(factionLabel(g),factionLabel(a))?"correct":"wrong"});
   cols.push({l:"Fruit",v:g.dfType==="None"?"Aucun":g.dfType,s:eq(g.dfType,a.dfType)?"correct":"wrong"});
   cols.push({l:"Haki",v:g.haki.length?g.haki.join(", "):"Aucun",s:aCmp(g.haki,a.haki)});
   cols.push({l:"Prime",v:g.bounty===0?"—":(g.bounty>=1e9?(g.bounty/1e9).toFixed(1)+"B":g.bounty>=1e6?(g.bounty/1e6).toFixed(0)+"M":g.bounty.toLocaleString("fr")),s:nSt(g.bounty,a.bounty),ar:g.bounty<a.bounty?"↑":g.bounty>a.bounty?"↓":""});
@@ -177,7 +194,6 @@ function compare(g,a){
   cols.push({l:"Origine",v:g.origin,s:eq(g.origin,a.origin)?"correct":"wrong"});
   const gA=arcIndex(g.arc),aA=arcIndex(a.arc);
   cols.push({l:"Arc",v:g.arc,s:arcSt(g.arc,a.arc),ar:gA<aA?"↑":gA>aA?"↓":""});
-  cols.push({l:"Statut",v:g.status,s:eq(g.status,a.status)?"correct":"wrong"});
   return cols;
 }
 
@@ -236,16 +252,28 @@ export default function App(){
     if(won)return;
     const cols=compare(char,answer);
     const isW=char.name===answer.name;
-    setGuesses(p=>[...p,{name:char.name,cols,isWin:isW}]);
+    const ts=Date.now();
+    setGuesses(p=>[...p,{name:char.name,cols,isWin:isW,ts}]);
     setInput("");setShowSug(false);
-    if(isW){setWon(true);setStreak(p=>p+1);setTotalWins(p=>p+1);setBestStreak(p=>Math.max(p,streak+1));}
-  },[answer,won,guesses,streak]);
+    if(isW){
+      setWon(true);
+      setStreak(prev=>{
+        const next=prev+1;
+        setBestStreak(b=>Math.max(b,next));
+        return next;
+      });
+      setTotalWins(p=>p+1);
+    }
+  },[answer,won]);
 
   const hints=useMemo(()=>{
     const h=[];
     if(hintLvl>=1)h.push(`Origine : ${answer.origin}`);
-    if(hintLvl>=2)h.push(`Type de Fruit : ${answer.dfType==="None"?"Aucun":answer.dfType}`);
-    if(hintLvl>=3)h.push(`Première lettre : ${answer.name[0]}`);
+    if(hintLvl>=2)h.push(`Statut : ${answer.status==="Alive"?"Vivant":"Mort"}`);
+    if(hintLvl>=3){
+      if(answer.df&&answer.df!=="None"&&answer.df!=="Unknown") h.push(`Fruit du Démon : ${answer.df}`);
+      else h.push(`Fruit du Démon : Aucun`);
+    }
     return h;
   },[hintLvl,answer]);
 
@@ -263,7 +291,11 @@ export default function App(){
     :root{--bg:#07080d;--bg2:#0e1018;--bg3:#161825;--bg4:#1e2035;--gold:#d4a843;--gold2:#f0c850;--gold3:#c49530;--red:#c0392b;--green:#1a8a4a;--green2:#27ae60;--orange:#d4780a;--blue:#2980b9;--text:#e8e0d0;--text2:#9a9488;--text3:#5a5650;--correct:#1a5e35;--close:#7a6510;--wrong:#3a1515;--correct-b:#2a8e55;--close-b:#b89520;--wrong-b:#6a2525}
     @keyframes su{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     @keyframes gl{0%,100%{box-shadow:0 0 8px rgba(212,168,67,.2)}50%{box-shadow:0 0 24px rgba(212,168,67,.35)}}
+    @keyframes flipIn{0%{opacity:0;transform:rotateX(-90deg) scale(.8);background:var(--bg3)}50%{opacity:.5;transform:rotateX(-30deg) scale(.95);background:var(--bg4)}100%{opacity:1;transform:rotateX(0) scale(1)}}
+    @keyframes nameGlow{0%{opacity:0;transform:translateX(-8px)}60%{opacity:1;transform:translateX(2px)}100%{opacity:1;transform:translateX(0)}}
     .su{animation:su .4s ease forwards}.gl{animation:gl 2s ease-in-out infinite}
+    .flip-cell{animation:flipIn .5s cubic-bezier(.34,1.56,.64,1) both;transform-origin:center;backface-visibility:hidden}
+    .flip-name{animation:nameGlow .4s ease both}
     input::placeholder{color:var(--text3)}
     ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--text3);border-radius:3px}
   `}</style>
@@ -412,33 +444,45 @@ export default function App(){
     )}
 
     {/* TABLE */}
-    {guesses.length>0&&(
-      <div style={{overflowX:"auto",marginBottom:16,borderRadius:10}}>
+    {guesses.length>0&&(() => {
+      const latestTs = Math.max(...guesses.map(g=>g.ts||0));
+      return(
+      <div style={{overflowX:"auto",marginBottom:16,borderRadius:10,perspective:"800px"}}>
         <table style={{width:"100%",borderCollapse:"separate",borderSpacing:2,minWidth:780}}>
           <thead><tr>
             <th style={th}>Nom</th>
-            {["Genre","Affil.","Équipage","Fruit","Haki","Prime","Taille","Origine","Arc","Statut"].map(h=>(
+            {["Genre","Groupe","Fruit","Haki","Prime","Taille","Origine","Arc"].map(h=>(
               <th key={h} style={th}>{h}</th>
             ))}
           </tr></thead>
           <tbody>
-            {[...guesses].reverse().map((g,i)=>(
-              <tr key={i} className="su" style={{animationDelay:`${i*30}ms`}}>
-                <td style={{...td,background:g.isWin?"var(--correct)":"var(--bg3)",fontWeight:600,color:g.isWin?"var(--gold2)":"var(--text)",borderLeft:g.isWin?"2px solid var(--green2)":"none",whiteSpace:"nowrap"}}>
+            {[...guesses].reverse().map((g,i)=>{
+              const isLatest = g.ts===latestTs;
+              return(
+              <tr key={g.ts||i}>
+                <td className={isLatest?"flip-name":""} style={{...td,background:g.isWin?"var(--correct)":"var(--bg3)",fontWeight:600,color:g.isWin?"var(--gold2)":"var(--text)",borderLeft:g.isWin?"2px solid var(--green2)":"none",whiteSpace:"nowrap"}}>
                   {g.name}
                 </td>
                 {g.cols.map((c,j)=>(
-                  <td key={j} style={{...td,background:`var(--${c.s})`,borderBottom:`2px solid var(--${c.s}-b)`}}>
+                  <td key={j}
+                      className={isLatest?"flip-cell":""}
+                      style={{
+                        ...td,
+                        background:`var(--${c.s})`,
+                        borderBottom:`2px solid var(--${c.s}-b)`,
+                        animationDelay: isLatest ? `${200 + j*180}ms` : "0ms"
+                      }}>
                     <div style={{fontSize:10,lineHeight:1.25,fontWeight:c.s==="correct"?600:400}}>{c.v}</div>
                     {c.ar&&<div style={{fontSize:13,marginTop:1,opacity:.75}}>{c.ar}</div>}
                   </td>
                 ))}
               </tr>
-            ))}
+            );})}
           </tbody>
         </table>
       </div>
-    )}
+      );
+    })()}
 
     {/* LEGEND */}
     <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",padding:"10px 0",borderTop:"1px solid rgba(255,255,255,.03)",marginTop:8}}>
