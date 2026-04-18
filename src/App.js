@@ -114,9 +114,13 @@ export default function App(){
   const[won,setWon]=useState(false);
   const[showSug,setShowSug]=useState(false);
   const[hintLvl,setHintLvl]=useState(0);
-  const[streak,setStreak]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_streak"))||0;}catch{return 0;}});
-  const[totalWins,setTotalWins]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_wins"))||0;}catch{return 0;}});
-  const[bestStreak,setBestStreak]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_best"))||0;}catch{return 0;}});
+  const[streaks,setStreaks]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_streaks"))||{};}catch{return{};}});
+  const[totalWins,setTotalWins]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_wins_all"))||{};}catch{return{};}});
+  const[bestStreaks,setBestStreaks]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_bests"))||{};}catch{return{};}});
+  // Convenience accessors for current mode
+  const streak=streaks[mode]||0;
+  const bestStreak=bestStreaks[mode]||0;
+  const modeWins=totalWins[mode]||0;
   const[tab,setTab]=useState("game");
   const[copied,setCopied]=useState(false);
   const[hardcore,setHardcore]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_hc"))||false;}catch{return false;}});
@@ -159,18 +163,16 @@ export default function App(){
       .catch(()=>{});
   },[mode]);
 
-  // Update leaderboard on Firebase when bestStreak changes
+  // Update leaderboard on Firebase when bestStreaks change
+  const overallBest=useMemo(()=>Math.max(0,...Object.values(bestStreaks)),[bestStreaks]);
   useEffect(()=>{
-    if(pseudo&&bestStreak>0){
-      // Write this player's best streak
+    if(pseudo&&overallBest>0){
       fetch(`${FB_URL}/leaderboard/${pseudo}.json`,{
         method:"PUT",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({pseudo,streak:bestStreak})
-      }).then(()=>{
-        // Re-fetch full leaderboard
-        return fetch(`${FB_URL}/leaderboard.json`);
-      }).then(r=>r.json()).then(data=>{
+        body:JSON.stringify({pseudo,streak:overallBest})
+      }).then(()=>fetch(`${FB_URL}/leaderboard.json`))
+      .then(r=>r.json()).then(data=>{
         if(data){
           const arr=Object.values(data);
           arr.sort((a,b)=>b.streak-a.streak);
@@ -178,7 +180,7 @@ export default function App(){
         }
       }).catch(()=>{});
     }
-  },[bestStreak,pseudo]);
+  },[overallBest,pseudo,FB_URL]);
 
   // Save pseudo
   const savePseudo=()=>{
@@ -292,8 +294,8 @@ export default function App(){
     try{const k=`gp_${mode}_${getDaySeed()}`;const d=JSON.parse(localStorage.getItem(k));if(d){setGuesses(d.g||[]);setWon(d.w||false);setLost(d.l||false);setHintLvl(d.h||0);}else{setGuesses([]);setWon(false);setLost(false);setHintLvl(0);}}catch{setGuesses([]);setWon(false);setLost(false);setHintLvl(0);}
   },[mode]);
   useEffect(()=>{
-    try{const k=`gp_${mode}_${getDaySeed()}`;localStorage.setItem(k,JSON.stringify({g:guesses,w:won,l:lost,h:hintLvl}));localStorage.setItem("gp_streak",JSON.stringify(streak));localStorage.setItem("gp_wins",JSON.stringify(totalWins));localStorage.setItem("gp_best",JSON.stringify(bestStreak));}catch{}
-  },[guesses,won,lost,hintLvl,streak,totalWins,bestStreak,mode]);
+    try{const k=`gp_${mode}_${getDaySeed()}`;localStorage.setItem(k,JSON.stringify({g:guesses,w:won,l:lost,h:hintLvl}));localStorage.setItem("gp_streaks",JSON.stringify(streaks));localStorage.setItem("gp_wins_all",JSON.stringify(totalWins));localStorage.setItem("gp_bests",JSON.stringify(bestStreaks));}catch{}
+  },[guesses,won,lost,hintLvl,streaks,totalWins,bestStreaks,mode]);
 
   const suggestions=useMemo(()=>{
     if(!input.trim())return[];
@@ -313,16 +315,16 @@ export default function App(){
       setWon(true);
       playSound("win");
       launchConfetti();
-      setStreak(prev=>{const next=prev+1;setBestStreak(b=>Math.max(b,next));return next;});
-      setTotalWins(p=>p+1);
+      setStreaks(prev=>{const next=(prev[mode]||0)+1;setBestStreaks(b=>({...b,[mode]:Math.max(b[mode]||0,next)}));return{...prev,[mode]:next};});
+      setTotalWins(p=>({...p,[mode]:(p[mode]||0)+1}));
     } else if(hardcore&&newGuesses.length>=MAX_ATTEMPTS){
       setLost(true);
       playSound("lose");
-      setStreak(0);
+      setStreaks(prev=>({...prev,[mode]:0}));
     } else {
       playSound("wrong");
     }
-  },[answer,won,lost,lang,guesses,hardcore,playSound,launchConfetti]);
+  },[answer,won,lost,lang,guesses,hardcore,playSound,launchConfetti,mode]);
 
   const hints=useMemo(()=>{
     const h=[];
@@ -432,9 +434,14 @@ export default function App(){
 
         {/* PERSONAL STATS */}
         <div style={{background:"var(--bg2)",border:"1px solid rgba(212,168,67,.1)",borderRadius:14,padding:24,marginBottom:16}}>
-          <h3 style={{fontFamily:"'Pirata One',cursive",color:"var(--gold)",fontSize:24,marginBottom:16}}>{t.statistics}</h3>
+          <h3 style={{fontFamily:"'Pirata One',cursive",color:"var(--gold)",fontSize:24,marginBottom:12}}>{t.statistics}</h3>
+          <div style={{display:"flex",gap:6,marginBottom:14,flexWrap:"wrap"}}>
+            {["classic","devilFruit","bounty","quote","laugh"].map(m=>(
+              <button key={m} onClick={()=>setMode(m)} style={{padding:"4px 12px",borderRadius:8,fontSize:12,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",border:mode===m?"1px solid var(--gold)":"1px solid rgba(255,255,255,.06)",background:mode===m?"rgba(212,168,67,.12)":"var(--bg3)",color:mode===m?"var(--gold)":"var(--text3)"}}>{t[m]||m}</button>
+            ))}
+          </div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}}>
-            {[{l:t.victories,v:totalWins,i:"🏆"},{l:t.streak,v:streak,i:"🔥"},{l:t.record,v:bestStreak,i:"⭐"}].map(s=>(
+            {[{l:t.victories,v:modeWins,i:"🏆"},{l:t.streak,v:streak,i:"🔥"},{l:t.record,v:bestStreak,i:"⭐"}].map(s=>(
               <div key={s.l} style={{background:"var(--bg3)",borderRadius:12,padding:18,textAlign:"center"}}>
                 <div style={{fontSize:28}}>{s.i}</div>
                 <div style={{fontFamily:"'Pirata One',cursive",fontSize:30,color:"var(--gold2)"}}>{s.v}</div>
@@ -452,16 +459,18 @@ export default function App(){
           ):(
             <div style={{display:"flex",flexDirection:"column",gap:6}}>
               {leaderboard.map((entry,i)=>{
-                const rankColors=["linear-gradient(135deg,#f0c850,#d4a843)","linear-gradient(135deg,#c0c0c0,#a0a0a0)","linear-gradient(135deg,#cd7f32,#a0522d)"];
+                const rankBg=["linear-gradient(135deg,#f0c850,#d4a843)","linear-gradient(135deg,#c0c0c0,#a0a0a0)","linear-gradient(135deg,#cd7f32,#a0522d)"];
+                const rowBg=["rgba(240,200,80,.08)","rgba(192,192,192,.08)","rgba(205,127,50,.08)"];
                 const borderColors=["rgba(240,200,80,.4)","rgba(192,192,192,.3)","rgba(205,127,50,.3)"];
                 const glowColors=["0 0 20px rgba(240,200,80,.25)","0 0 15px rgba(192,192,192,.2)","0 0 12px rgba(205,127,50,.15)"];
+                const textColors=["#f0c850","#d0d0d0","#cd7f32"];
                 const isTop3=i<3;
                 const isMe=entry.pseudo===pseudo;
                 return(
                   <div key={entry.pseudo}
                     style={{
                       display:"flex",alignItems:"center",gap:12,padding:"12px 16px",
-                      background:isTop3?`${rankColors[i]}10`:"var(--bg3)",
+                      background:isTop3?rowBg[i]:"var(--bg3)",
                       border:`1px solid ${isTop3?borderColors[i]:"rgba(255,255,255,.04)"}`,
                       borderRadius:12,
                       boxShadow:isTop3?glowColors[i]:"none",
@@ -469,28 +478,27 @@ export default function App(){
                       cursor:"default",
                       transform:isMe?"scale(1.02)":"scale(1)",
                     }}
-                    onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.04)";e.currentTarget.style.boxShadow=isTop3?glowColors[i].replace(/\.[\d]+\)/,".5)"):"0 0 15px rgba(212,168,67,.15)";}}
+                    onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.04)";e.currentTarget.style.boxShadow=isTop3?glowColors[i].replace(".25)",".5)").replace(".2)",".4)").replace(".15)",".3)"):"0 0 15px rgba(212,168,67,.15)";}}
                     onMouseLeave={e=>{e.currentTarget.style.transform=isMe?"scale(1.02)":"scale(1)";e.currentTarget.style.boxShadow=isTop3?glowColors[i]:"none";}}>
                     {/* Rank */}
                     <div style={{
                       width:36,height:36,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",
-                      background:isTop3?rankColors[i]:"var(--bg4)",
+                      background:isTop3?rankBg[i]:"var(--bg4)",
                       color:isTop3?"#0a0a0f":"var(--text3)",
                       fontFamily:"'Pirata One',cursive",fontSize:isTop3?20:16,fontWeight:700,
-                      boxShadow:isTop3?`inset 0 -2px 4px rgba(0,0,0,.2)`:"none",
                     }}>
                       {i===0?"👑":i===1?"🥈":i===2?"🥉":i+1}
                     </div>
                     {/* Pseudo */}
                     <div style={{flex:1}}>
-                      <div style={{fontSize:15,fontWeight:isMe?700:500,color:isTop3?"var(--gold2)":"var(--text)",fontFamily:isTop3?"'Pirata One',cursive":"'DM Sans',sans-serif"}}>
+                      <div style={{fontSize:15,fontWeight:isMe?700:500,color:isTop3?textColors[i]:"var(--text)",fontFamily:isTop3?"'Pirata One',cursive":"'DM Sans',sans-serif"}}>
                         {entry.pseudo}{isMe?" ⭐":""}
                       </div>
                     </div>
                     {/* Streak */}
                     <div style={{display:"flex",alignItems:"center",gap:4}}>
                       <span style={{fontSize:18}}>🔥</span>
-                      <span style={{fontFamily:"'Pirata One',cursive",fontSize:22,color:isTop3?"var(--gold2)":"var(--text)"}}>{entry.streak}</span>
+                      <span style={{fontFamily:"'Pirata One',cursive",fontSize:22,color:isTop3?textColors[i]:"var(--text)"}}>{entry.streak}</span>
                     </div>
                   </div>
                 );
