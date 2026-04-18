@@ -7,9 +7,9 @@ function arcIdx(a){const i=ARC_ORDER.indexOf(a);return i===-1?999:i;}
 // ─── i18n ───
 const LANG_OPTIONS=[{code:"fr",label:"Français",flag:"🇫🇷"},{code:"en",label:"English",flag:"🇬🇧"},{code:"es",label:"Español",flag:"🇪🇸"}];
 const T={
-  fr:{title:"Grand Piecedle",subtitle:"personnages • 5 modes • Quotidien",play:"🎮 Jouer",stats:"📊 Stats",classic:"Classique",classicD:"Devine par attributs",devilFruit:"Fruit du Démon",devilFruitD:"Quel possesseur ?",bounty:"Prime",bountyD:"Quelle prime ?",quote:"Citation",quoteD:"Qui a dit ça ?",laugh:"Rire",laughD:"Quel rire ?",placeholder:"Tape le nom d'un personnage...",attempt:"Essai n°",hint:"Indice",hints:"INDICES DÉBLOQUÉS",higher:"plus élevé/tardif",lower:"plus bas/tôt",win:"Victoire !",wasIt:"C'était",inAttempts:"en %n essai%s",share:"📋 Partager",copied:"✅ Copié !",correct:"Correct",close:"Proche",wrong:"Incorrect",origin:"Origine",status:"Statut",alive:"Vivant",dead:"Mort",fruit:"Fruit du Démon",none:"Aucun",footer:"Fan Game 🏴‍☠️ Nouveau défi chaque jour à minuit",dfClue:"FRUIT DU DÉMON",dfQ:"Qui possède ce fruit ?",bountyClue:"PRIME RECHERCHÉE",bountyQ:"Quel pirate possède cette prime ?",quoteClue:"CITATION",quoteQ:"Qui a dit ça ?",laughClue:"RIRE MYSTÈRE",laughQ:"À qui appartient ce rire ?",wantedClue:"AVIS DE RECHERCHE",wantedQ:"Qui se cache derrière cet avis ?",streak:"Streak",record:"Record",victories:"Victoires",statistics:"Statistiques",gender:"Genre",group:"Groupe",fruitType:"Fruit",haki:"Haki",primeH:"Prime",height:"Taille",originH:"Origine",arcH:"Arc",nameH:"Nom",legend:"↑↓ = valeur / arc chronologique",marine:"Marine",revolutionary:"Révolutionnaire",worldGov:"Gouvernement Mondial",civil:"Civil"},
-  en:{title:"Grand Piecedle",subtitle:"characters • 5 modes • Daily",play:"🎮 Play",stats:"📊 Stats",classic:"Classic",classicD:"Guess by attributes",devilFruit:"Devil Fruit",devilFruitD:"Who has it?",bounty:"Bounty",bountyD:"Whose bounty?",quote:"Quote",quoteD:"Who said this?",laugh:"Laugh",laughD:"Whose laugh?",placeholder:"Type a character name...",attempt:"Attempt #",hint:"Hint",hints:"HINTS UNLOCKED",higher:"higher/later",lower:"lower/earlier",win:"Victory!",wasIt:"It was",inAttempts:"in %n attempt%s",share:"📋 Share",copied:"✅ Copied!",correct:"Correct",close:"Close",wrong:"Wrong",origin:"Origin",status:"Status",alive:"Alive",dead:"Dead",fruit:"Devil Fruit",none:"None",footer:"Fan Game 🏴‍☠️ New challenge every day at midnight",dfClue:"DEVIL FRUIT",dfQ:"Who has this fruit?",bountyClue:"WANTED BOUNTY",bountyQ:"Which pirate has this bounty?",quoteClue:"MYSTERY QUOTE",quoteQ:"Who said this?",laughClue:"MYSTERY LAUGH",laughQ:"Whose laugh is this?",wantedClue:"WANTED POSTER",wantedQ:"Who's hiding behind this poster?",streak:"Streak",record:"Record",victories:"Victories",statistics:"Statistics",gender:"Gender",group:"Group",fruitType:"Fruit",haki:"Haki",primeH:"Bounty",height:"Height",originH:"Origin",arcH:"Arc",nameH:"Name",legend:"↑↓ = value / chronological arc",marine:"Marine",revolutionary:"Revolutionary",worldGov:"World Government",civil:"Civilian"},
-  es:{title:"Grand Piecedle",subtitle:"personajes • 5 modos • Diario",play:"🎮 Jugar",stats:"📊 Stats",classic:"Clásico",classicD:"Adivina por atributos",devilFruit:"Fruta del Diablo",devilFruitD:"¿Quién la tiene?",bounty:"Recompensa",bountyD:"¿De quién?",quote:"Cita",quoteD:"¿Quién lo dijo?",laugh:"Risa",laughD:"¿De quién?",placeholder:"Escribe el nombre...",attempt:"Intento #",hint:"Pista",hints:"PISTAS",higher:"más alto/tardío",lower:"más bajo/temprano",win:"¡Victoria!",wasIt:"Era",inAttempts:"en %n intento%s",share:"📋 Compartir",copied:"✅ ¡Copiado!",correct:"Correcto",close:"Cerca",wrong:"Incorrecto",origin:"Origen",status:"Estado",alive:"Vivo",dead:"Muerto",fruit:"Fruta del Diablo",none:"Ninguna",footer:"Fan Game 🏴‍☠️ Nuevo desafío cada día a medianoche",dfClue:"FRUTA DEL DIABLO",dfQ:"¿Quién posee esta fruta?",bountyClue:"RECOMPENSA",bountyQ:"¿Qué pirata tiene esta recompensa?",quoteClue:"CITA MISTERIOSA",quoteQ:"¿Quién dijo esto?",laughClue:"RISA MISTERIOSA",laughQ:"¿De quién es esta risa?",wantedClue:"CARTEL DE BÚSQUEDA",wantedQ:"¿Quién se esconde detrás?",streak:"Racha",record:"Récord",victories:"Victorias",statistics:"Estadísticas",gender:"Género",group:"Grupo",fruitType:"Fruta",haki:"Haki",primeH:"Recompensa",height:"Altura",originH:"Origen",arcH:"Arco",nameH:"Nombre",legend:"↑↓ = valor / arco cronológico",marine:"Marina",revolutionary:"Revolucionario",worldGov:"Gobierno Mundial",civil:"Civil"},
+  fr:{title:"Grand Piecedle",subtitle:"personnages • 5 modes • Quotidien",play:"🎮 Jouer",stats:"📊 Stats",classic:"Classique",classicD:"Devine par attributs",devilFruit:"Fruit du Démon",devilFruitD:"Quel possesseur ?",bounty:"Prime",bountyD:"Quelle prime ?",quote:"Citation",quoteD:"Qui a dit ça ?",laugh:"Rire",laughD:"Quel rire ?",placeholder:"Tape le nom d'un personnage...",attempt:"Essai n°",hint:"Indice",hints:"INDICES DÉBLOQUÉS",higher:"plus élevé/tardif",lower:"plus bas/tôt",win:"Victoire !",wasIt:"C'était",inAttempts:"en %n essai%s",share:"📋 Partager",copied:"✅ Copié !",correct:"Correct",close:"Proche",wrong:"Incorrect",origin:"Origine",status:"Statut",alive:"Vivant",dead:"Mort",fruit:"Fruit du Démon",none:"Aucun",footer:"Fan Game 🏴‍☠️ Nouveau défi chaque jour à minuit",dfClue:"FRUIT DU DÉMON",dfQ:"Qui possède ce fruit ?",bountyClue:"PRIME RECHERCHÉE",bountyQ:"Quel pirate possède cette prime ?",quoteClue:"CITATION",quoteQ:"Qui a dit ça ?",laughClue:"RIRE MYSTÈRE",laughQ:"À qui appartient ce rire ?",wantedClue:"AVIS DE RECHERCHE",wantedQ:"Qui se cache derrière cet avis ?",streak:"Streak",record:"Record",victories:"Victoires",statistics:"Statistiques",gender:"Genre",group:"Groupe",fruitType:"Fruit",haki:"Haki",primeH:"Prime",height:"Taille",originH:"Origine",arcH:"Arc",nameH:"Nom",legend:"↑↓ = valeur / arc chronologique",marine:"Marine",revolutionary:"Révolutionnaire",worldGov:"Gouvernement Mondial",civil:"Civil",pseudo:"Ton pseudo",pseudoPlaceholder:"Entre ton pseudo...",save:"Sauvegarder",leaderboard:"🏴‍☠️ TOP 10 ÉQUIPAGE",todayFound:"ont trouvé aujourd'hui",players:"joueurs",noLeaderboard:"Aucun pirate au classement",rank:"Rang",hardcore:"Mode Hardcore",hardcoreDesc:"6 essais max",lost:"Défaite...",lostMsg:"Le personnage était",attemptsLeft:"%n essais restants",history:"Historique",historyTitle:"📅 Historique des 30 derniers jours",soundOn:"Son activé",soundOff:"Son désactivé",won2:"Gagné",lost2:"Perdu",notPlayed:"Non joué",nextChallenge:"Prochain défi dans"},
+  en:{title:"Grand Piecedle",subtitle:"characters • 5 modes • Daily",play:"🎮 Play",stats:"📊 Stats",classic:"Classic",classicD:"Guess by attributes",devilFruit:"Devil Fruit",devilFruitD:"Who has it?",bounty:"Bounty",bountyD:"Whose bounty?",quote:"Quote",quoteD:"Who said this?",laugh:"Laugh",laughD:"Whose laugh?",placeholder:"Type a character name...",attempt:"Attempt #",hint:"Hint",hints:"HINTS UNLOCKED",higher:"higher/later",lower:"lower/earlier",win:"Victory!",wasIt:"It was",inAttempts:"in %n attempt%s",share:"📋 Share",copied:"✅ Copied!",correct:"Correct",close:"Close",wrong:"Wrong",origin:"Origin",status:"Status",alive:"Alive",dead:"Dead",fruit:"Devil Fruit",none:"None",footer:"Fan Game 🏴‍☠️ New challenge every day at midnight",dfClue:"DEVIL FRUIT",dfQ:"Who has this fruit?",bountyClue:"WANTED BOUNTY",bountyQ:"Which pirate has this bounty?",quoteClue:"MYSTERY QUOTE",quoteQ:"Who said this?",laughClue:"MYSTERY LAUGH",laughQ:"Whose laugh is this?",wantedClue:"WANTED POSTER",wantedQ:"Who's hiding behind this poster?",streak:"Streak",record:"Record",victories:"Victories",statistics:"Statistics",gender:"Gender",group:"Group",fruitType:"Fruit",haki:"Haki",primeH:"Bounty",height:"Height",originH:"Origin",arcH:"Arc",nameH:"Name",legend:"↑↓ = value / chronological arc",marine:"Marine",revolutionary:"Revolutionary",worldGov:"World Government",civil:"Civilian",hardcore:"Hardcore Mode",hardcoreDesc:"6 attempts max",lost:"Defeat...",lostMsg:"The character was",attemptsLeft:"%n attempts left",history:"History",historyTitle:"📅 Last 30 days history",soundOn:"Sound on",soundOff:"Sound off",won2:"Won",lost2:"Lost",notPlayed:"Not played",nextChallenge:"Next challenge in"},
+  es:{title:"Grand Piecedle",subtitle:"personajes • 5 modos • Diario",play:"🎮 Jugar",stats:"📊 Stats",classic:"Clásico",classicD:"Adivina por atributos",devilFruit:"Fruta del Diablo",devilFruitD:"¿Quién la tiene?",bounty:"Recompensa",bountyD:"¿De quién?",quote:"Cita",quoteD:"¿Quién lo dijo?",laugh:"Risa",laughD:"¿De quién?",placeholder:"Escribe el nombre...",attempt:"Intento #",hint:"Pista",hints:"PISTAS",higher:"más alto/tardío",lower:"más bajo/temprano",win:"¡Victoria!",wasIt:"Era",inAttempts:"en %n intento%s",share:"📋 Compartir",copied:"✅ ¡Copiado!",correct:"Correcto",close:"Cerca",wrong:"Incorrecto",origin:"Origen",status:"Estado",alive:"Vivo",dead:"Muerto",fruit:"Fruta del Diablo",none:"Ninguna",footer:"Fan Game 🏴‍☠️ Nuevo desafío cada día a medianoche",dfClue:"FRUTA DEL DIABLO",dfQ:"¿Quién posee esta fruta?",bountyClue:"RECOMPENSA",bountyQ:"¿Qué pirata tiene esta recompensa?",quoteClue:"CITA MISTERIOSA",quoteQ:"¿Quién dijo esto?",laughClue:"RISA MISTERIOSA",laughQ:"¿De quién es esta risa?",wantedClue:"CARTEL DE BÚSQUEDA",wantedQ:"¿Quién se esconde detrás?",streak:"Racha",record:"Récord",victories:"Victorias",statistics:"Estadísticas",gender:"Género",group:"Grupo",fruitType:"Fruta",haki:"Haki",primeH:"Recompensa",height:"Altura",originH:"Origen",arcH:"Arco",nameH:"Nombre",legend:"↑↓ = valor / arco cronológico",marine:"Marina",revolutionary:"Revolucionario",worldGov:"Gobierno Mundial",civil:"Civil",hardcore:"Modo Hardcore",hardcoreDesc:"6 intentos máx",lost:"Derrota...",lostMsg:"El personaje era",attemptsLeft:"%n intentos restantes",history:"Historial",historyTitle:"📅 Historial de los últimos 30 días",soundOn:"Sonido activado",soundOff:"Sonido desactivado",won2:"Ganado",lost2:"Perdido",notPlayed:"No jugado",nextChallenge:"Próximo desafío en"},
 };
 
 // ─── CHARACTER DATABASE ───
@@ -119,18 +119,181 @@ export default function App(){
   const[bestStreak,setBestStreak]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_best"))||0;}catch{return 0;}});
   const[tab,setTab]=useState("game");
   const[copied,setCopied]=useState(false);
-  const ref=useRef(null);
+  const[hardcore,setHardcore]=useState(()=>{try{return JSON.parse(localStorage.getItem("gp_hc"))||false;}catch{return false;}});
+  const[lost,setLost]=useState(false);
+  const[soundOn,setSoundOn]=useState(()=>{try{const v=localStorage.getItem("gp_sound");return v===null?true:JSON.parse(v);}catch{return true;}});
+  const[showConfetti,setShowConfetti]=useState(false);
+  const[countdown,setCountdown]=useState("");
+  const MAX_ATTEMPTS=6;
+  const[pseudo,setPseudo]=useState(()=>{try{return localStorage.getItem("gp_pseudo")||"";}catch{return"";}});
+  const[pseudoInput,setPseudoInput]=useState("");
+  const[dailyWins,setDailyWins]=useState({});
+  const inputRef=useRef(null);
+
+  // ─── FIREBASE CONFIG ───
+  // Replace this URL with YOUR Firebase Realtime Database URL
+  const FB_URL="https://grandpiecedle-default-rtdb.europe-west1.firebasedatabase.app";
+
+  // Leaderboard: shared via Firebase
+  const[leaderboard,setLeaderboard]=useState([]);
+
+  // Fetch leaderboard from Firebase on mount
+  useEffect(()=>{
+    fetch(`${FB_URL}/leaderboard.json`)
+      .then(r=>r.json())
+      .then(data=>{
+        if(data){
+          const arr=Object.values(data);
+          arr.sort((a,b)=>b.streak-a.streak);
+          setLeaderboard(arr.slice(0,10));
+        }
+      }).catch(()=>{});
+  },[]);
+
+  // Fetch daily winners count from Firebase on mount + mode change
+  useEffect(()=>{
+    const day=getDaySeed();
+    fetch(`${FB_URL}/daily/${day}.json`)
+      .then(r=>r.json())
+      .then(data=>{if(data)setDailyWins(data);})
+      .catch(()=>{});
+  },[mode]);
+
+  // Update leaderboard on Firebase when bestStreak changes
+  useEffect(()=>{
+    if(pseudo&&bestStreak>0){
+      // Write this player's best streak
+      fetch(`${FB_URL}/leaderboard/${pseudo}.json`,{
+        method:"PUT",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({pseudo,streak:bestStreak})
+      }).then(()=>{
+        // Re-fetch full leaderboard
+        return fetch(`${FB_URL}/leaderboard.json`);
+      }).then(r=>r.json()).then(data=>{
+        if(data){
+          const arr=Object.values(data);
+          arr.sort((a,b)=>b.streak-a.streak);
+          setLeaderboard(arr.slice(0,10));
+        }
+      }).catch(()=>{});
+    }
+  },[bestStreak,pseudo]);
+
+  // Save pseudo
+  const savePseudo=()=>{
+    const p=pseudoInput.trim().slice(0,16);
+    if(p){setPseudo(p);try{localStorage.setItem("gp_pseudo",p);}catch{}}
+  };
+
+  // Track daily winners count on Firebase
+  useEffect(()=>{
+    if(won&&pseudo){
+      const day=getDaySeed();
+      const key=mode;
+      setDailyWins(prev=>{
+        const existing=prev[key]||{};
+        if(!existing[pseudo]){
+          const update={...prev,[key]:{...existing,[pseudo]:true}};
+          fetch(`${FB_URL}/daily/${day}/${key}/${pseudo}.json`,{
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(true)
+          }).catch(()=>{});
+          return update;
+        }
+        return prev;
+      });
+    }
+  },[won,pseudo,mode,FB_URL]);
 
   useEffect(()=>{try{localStorage.setItem("gp_lang",lang);}catch{}},[lang]);
+  useEffect(()=>{try{localStorage.setItem("gp_hc",JSON.stringify(hardcore));}catch{}},[hardcore]);
+  useEffect(()=>{try{localStorage.setItem("gp_sound",JSON.stringify(soundOn));}catch{}},[soundOn]);
+
+  // ─── AUDIO ───
+  const playSound=useCallback((type)=>{
+    if(!soundOn)return;
+    try{
+      const ctx=new(window.AudioContext||window.webkitAudioContext)();
+      const osc=ctx.createOscillator();
+      const gain=ctx.createGain();
+      osc.connect(gain);gain.connect(ctx.destination);
+      if(type==="win"){
+        osc.type="triangle";osc.frequency.setValueAtTime(523,ctx.currentTime);
+        osc.frequency.setValueAtTime(659,ctx.currentTime+0.15);
+        osc.frequency.setValueAtTime(784,ctx.currentTime+0.3);
+        osc.frequency.setValueAtTime(1047,ctx.currentTime+0.45);
+        gain.gain.setValueAtTime(0.3,ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.7);
+        osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.7);
+      } else if(type==="lose"){
+        osc.type="sawtooth";osc.frequency.setValueAtTime(300,ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(100,ctx.currentTime+0.6);
+        gain.gain.setValueAtTime(0.2,ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.6);
+        osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.6);
+      } else {
+        osc.type="sine";osc.frequency.setValueAtTime(220,ctx.currentTime);
+        osc.frequency.setValueAtTime(180,ctx.currentTime+0.1);
+        gain.gain.setValueAtTime(0.15,ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.2);
+        osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.2);
+      }
+    }catch{}
+  },[soundOn]);
+
+  // ─── CONFETTI ───
+  const launchConfetti=useCallback(()=>{
+    setShowConfetti(true);
+    setTimeout(()=>setShowConfetti(false),3000);
+  },[]);
+
+  // ─── COUNTDOWN ───
+  useEffect(()=>{
+    if(!won&&!lost)return;
+    const tick=()=>{
+      const now=new Date();
+      const tomorrow=new Date(now);
+      tomorrow.setDate(tomorrow.getDate()+1);
+      tomorrow.setHours(0,0,0,0);
+      const diff=tomorrow-now;
+      const h=String(Math.floor(diff/3600000)).padStart(2,"0");
+      const m=String(Math.floor((diff%3600000)/60000)).padStart(2,"0");
+      const s=String(Math.floor((diff%60000)/1000)).padStart(2,"0");
+      setCountdown(`${h}:${m}:${s}`);
+    };
+    tick();
+    const id=setInterval(tick,1000);
+    return()=>clearInterval(id);
+  },[won,lost]);
+
+  // ─── HISTORY ───
+  const getHistory=useCallback(()=>{
+    const days=[];
+    const today=new Date();
+    for(let i=29;i>=0;i--){
+      const d=new Date(today);d.setDate(d.getDate()-i);
+      const seed=d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();
+      const key=`gp_classic_${seed}`;
+      try{
+        const data=JSON.parse(localStorage.getItem(key));
+        if(data&&data.w)days.push({date:d,status:"won"});
+        else if(data&&data.g&&data.g.length>0)days.push({date:d,status:"lost"});
+        else days.push({date:d,status:"none"});
+      }catch{days.push({date:d,status:"none"});}
+    }
+    return days;
+  },[]);
 
   const answer=useMemo(()=>pickDaily(mode),[mode]);
 
   useEffect(()=>{
-    try{const k=`gp_${mode}_${getDaySeed()}`;const d=JSON.parse(localStorage.getItem(k));if(d){setGuesses(d.g||[]);setWon(d.w||false);setHintLvl(d.h||0);}else{setGuesses([]);setWon(false);setHintLvl(0);}}catch{setGuesses([]);setWon(false);setHintLvl(0);}
+    try{const k=`gp_${mode}_${getDaySeed()}`;const d=JSON.parse(localStorage.getItem(k));if(d){setGuesses(d.g||[]);setWon(d.w||false);setLost(d.l||false);setHintLvl(d.h||0);}else{setGuesses([]);setWon(false);setLost(false);setHintLvl(0);}}catch{setGuesses([]);setWon(false);setLost(false);setHintLvl(0);}
   },[mode]);
   useEffect(()=>{
-    try{const k=`gp_${mode}_${getDaySeed()}`;localStorage.setItem(k,JSON.stringify({g:guesses,w:won,h:hintLvl}));localStorage.setItem("gp_streak",JSON.stringify(streak));localStorage.setItem("gp_wins",JSON.stringify(totalWins));localStorage.setItem("gp_best",JSON.stringify(bestStreak));}catch{}
-  },[guesses,won,hintLvl,streak,totalWins,bestStreak,mode]);
+    try{const k=`gp_${mode}_${getDaySeed()}`;localStorage.setItem(k,JSON.stringify({g:guesses,w:won,l:lost,h:hintLvl}));localStorage.setItem("gp_streak",JSON.stringify(streak));localStorage.setItem("gp_wins",JSON.stringify(totalWins));localStorage.setItem("gp_best",JSON.stringify(bestStreak));}catch{}
+  },[guesses,won,lost,hintLvl,streak,totalWins,bestStreak,mode]);
 
   const suggestions=useMemo(()=>{
     if(!input.trim())return[];
@@ -139,14 +302,27 @@ export default function App(){
   },[input,guesses,lang]);
 
   const submitGuess=useCallback(char=>{
-    if(won)return;
+    if(won||lost)return;
     const cols=compare(char,answer,lang);
     const isW=getL(char.name,lang)===getL(answer.name,lang);
     const ts=Date.now();
-    setGuesses(p=>[...p,{name:getL(char.name,lang),charId:char.id,crew:char.crew,cols,isWin:isW,ts}]);
+    const newGuesses=[...guesses,{name:getL(char.name,lang),charId:char.id,crew:char.crew,cols,isWin:isW,ts}];
+    setGuesses(newGuesses);
     setInput("");setShowSug(false);
-    if(isW){setWon(true);setStreak(prev=>{const next=prev+1;setBestStreak(b=>Math.max(b,next));return next;});setTotalWins(p=>p+1);}
-  },[answer,won,lang]);
+    if(isW){
+      setWon(true);
+      playSound("win");
+      launchConfetti();
+      setStreak(prev=>{const next=prev+1;setBestStreak(b=>Math.max(b,next));return next;});
+      setTotalWins(p=>p+1);
+    } else if(hardcore&&newGuesses.length>=MAX_ATTEMPTS){
+      setLost(true);
+      playSound("lose");
+      setStreak(0);
+    } else {
+      playSound("wrong");
+    }
+  },[answer,won,lost,lang,guesses,hardcore,playSound,launchConfetti]);
 
   const hints=useMemo(()=>{
     const h=[];
@@ -191,6 +367,16 @@ export default function App(){
     .flip-name{animation:nameGlow .4s ease both}
     .avatar{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700;color:#fff;flex-shrink:0;text-shadow:0 1px 2px rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.15)}
     input::placeholder{color:var(--text3)}
+    @keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+    .confetti-piece{position:fixed;top:-10px;width:10px;height:10px;z-index:999;pointer-events:none;animation:confettiFall 2.5s ease-out forwards}
+    .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg3);border-radius:10px;margin-bottom:8px}
+    .toggle-label{font-size:14px;color:var(--text);display:flex;align-items:center;gap:8px}
+    .toggle-sub{font-size:11px;color:var(--text3)}
+    .toggle-btn{width:44px;height:24px;border-radius:12px;border:none;cursor:pointer;position:relative;transition:background .2s}
+    .toggle-btn::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s}
+    .toggle-btn.on{background:var(--green2)}
+    .toggle-btn.on::after{transform:translateX(20px)}
+    .toggle-btn.off{background:var(--text3)}
     ::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--text3);border-radius:3px}
   `}</style>
   <div style={{fontFamily:"'DM Sans',sans-serif",background:"var(--bg)",color:"var(--text)",minHeight:"100vh",position:"relative",overflow:"hidden"}}>
@@ -225,16 +411,128 @@ export default function App(){
     </div>
 
     {tab==="stats"&&(
-      <div className="su" style={{background:"var(--bg2)",border:"1px solid rgba(212,168,67,.1)",borderRadius:14,padding:24,marginBottom:24}}>
-        <h3 style={{fontFamily:"'Pirata One',cursive",color:"var(--gold)",fontSize:24,marginBottom:16}}>{t.statistics}</h3>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}}>
-          {[{l:t.victories,v:totalWins,i:"🏆"},{l:t.streak,v:streak,i:"🔥"},{l:t.record,v:bestStreak,i:"⭐"}].map(s=>(
-            <div key={s.l} style={{background:"var(--bg3)",borderRadius:12,padding:18,textAlign:"center"}}>
-              <div style={{fontSize:28}}>{s.i}</div>
-              <div style={{fontFamily:"'Pirata One',cursive",fontSize:30,color:"var(--gold2)"}}>{s.v}</div>
-              <div style={{fontSize:12,color:"var(--text2)",marginTop:2}}>{s.l}</div>
+      <div className="su">
+        {/* PSEUDO */}
+        <div style={{background:"var(--bg2)",border:"1px solid rgba(212,168,67,.1)",borderRadius:14,padding:20,marginBottom:16}}>
+          <div style={{fontSize:12,color:"var(--gold)",fontWeight:700,letterSpacing:2,marginBottom:10}}>{t.pseudo}</div>
+          {pseudo?(
+            <div style={{display:"flex",alignItems:"center",gap:10}}>
+              <div style={{fontFamily:"'Pirata One',cursive",fontSize:24,color:"var(--gold2)"}}>{pseudo}</div>
+              <button onClick={()=>{setPseudo("");setPseudoInput("");try{localStorage.removeItem("gp_pseudo");}catch{}}} style={{background:"none",border:"1px solid var(--text3)",borderRadius:6,padding:"4px 10px",color:"var(--text3)",cursor:"pointer",fontSize:11,fontFamily:"'DM Sans',sans-serif"}}>✏️</button>
             </div>
-          ))}
+          ):(
+            <div style={{display:"flex",gap:8}}>
+              <input value={pseudoInput} onChange={e=>setPseudoInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter")savePseudo();}}
+                placeholder={t.pseudoPlaceholder} maxLength={16}
+                style={{flex:1,padding:"10px 14px",background:"var(--bg3)",border:"1px solid rgba(212,168,67,.15)",borderRadius:10,color:"var(--text)",fontSize:15,fontFamily:"'DM Sans',sans-serif",outline:"none"}}/>
+              <button onClick={savePseudo} style={{background:"var(--gold)",color:"#0a0a0f",border:"none",borderRadius:10,padding:"0 20px",fontWeight:700,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontSize:14}}>{t.save}</button>
+            </div>
+          )}
+        </div>
+
+        {/* PERSONAL STATS */}
+        <div style={{background:"var(--bg2)",border:"1px solid rgba(212,168,67,.1)",borderRadius:14,padding:24,marginBottom:16}}>
+          <h3 style={{fontFamily:"'Pirata One',cursive",color:"var(--gold)",fontSize:24,marginBottom:16}}>{t.statistics}</h3>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}}>
+            {[{l:t.victories,v:totalWins,i:"🏆"},{l:t.streak,v:streak,i:"🔥"},{l:t.record,v:bestStreak,i:"⭐"}].map(s=>(
+              <div key={s.l} style={{background:"var(--bg3)",borderRadius:12,padding:18,textAlign:"center"}}>
+                <div style={{fontSize:28}}>{s.i}</div>
+                <div style={{fontFamily:"'Pirata One',cursive",fontSize:30,color:"var(--gold2)"}}>{s.v}</div>
+                <div style={{fontSize:12,color:"var(--text2)",marginTop:2}}>{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* LEADERBOARD */}
+        <div style={{background:"var(--bg2)",border:"1px solid rgba(212,168,67,.1)",borderRadius:14,padding:24,marginBottom:24}}>
+          <h3 style={{fontFamily:"'Pirata One',cursive",color:"var(--gold)",fontSize:22,marginBottom:16,textAlign:"center"}}>{t.leaderboard}</h3>
+          {leaderboard.length===0?(
+            <div style={{textAlign:"center",color:"var(--text3)",fontSize:14,padding:20}}>{t.noLeaderboard}</div>
+          ):(
+            <div style={{display:"flex",flexDirection:"column",gap:6}}>
+              {leaderboard.map((entry,i)=>{
+                const rankColors=["linear-gradient(135deg,#f0c850,#d4a843)","linear-gradient(135deg,#c0c0c0,#a0a0a0)","linear-gradient(135deg,#cd7f32,#a0522d)"];
+                const borderColors=["rgba(240,200,80,.4)","rgba(192,192,192,.3)","rgba(205,127,50,.3)"];
+                const glowColors=["0 0 20px rgba(240,200,80,.25)","0 0 15px rgba(192,192,192,.2)","0 0 12px rgba(205,127,50,.15)"];
+                const isTop3=i<3;
+                const isMe=entry.pseudo===pseudo;
+                return(
+                  <div key={entry.pseudo}
+                    style={{
+                      display:"flex",alignItems:"center",gap:12,padding:"12px 16px",
+                      background:isTop3?`${rankColors[i]}10`:"var(--bg3)",
+                      border:`1px solid ${isTop3?borderColors[i]:"rgba(255,255,255,.04)"}`,
+                      borderRadius:12,
+                      boxShadow:isTop3?glowColors[i]:"none",
+                      transition:"all .3s ease",
+                      cursor:"default",
+                      transform:isMe?"scale(1.02)":"scale(1)",
+                    }}
+                    onMouseEnter={e=>{e.currentTarget.style.transform="scale(1.04)";e.currentTarget.style.boxShadow=isTop3?glowColors[i].replace(/\.[\d]+\)/,".5)"):"0 0 15px rgba(212,168,67,.15)";}}
+                    onMouseLeave={e=>{e.currentTarget.style.transform=isMe?"scale(1.02)":"scale(1)";e.currentTarget.style.boxShadow=isTop3?glowColors[i]:"none";}}>
+                    {/* Rank */}
+                    <div style={{
+                      width:36,height:36,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",
+                      background:isTop3?rankColors[i]:"var(--bg4)",
+                      color:isTop3?"#0a0a0f":"var(--text3)",
+                      fontFamily:"'Pirata One',cursive",fontSize:isTop3?20:16,fontWeight:700,
+                      boxShadow:isTop3?`inset 0 -2px 4px rgba(0,0,0,.2)`:"none",
+                    }}>
+                      {i===0?"👑":i===1?"🥈":i===2?"🥉":i+1}
+                    </div>
+                    {/* Pseudo */}
+                    <div style={{flex:1}}>
+                      <div style={{fontSize:15,fontWeight:isMe?700:500,color:isTop3?"var(--gold2)":"var(--text)",fontFamily:isTop3?"'Pirata One',cursive":"'DM Sans',sans-serif"}}>
+                        {entry.pseudo}{isMe?" ⭐":""}
+                      </div>
+                    </div>
+                    {/* Streak */}
+                    <div style={{display:"flex",alignItems:"center",gap:4}}>
+                      <span style={{fontSize:18}}>🔥</span>
+                      <span style={{fontFamily:"'Pirata One',cursive",fontSize:22,color:isTop3?"var(--gold2)":"var(--text)"}}>{entry.streak}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* HISTORY CALENDAR */}
+        <div style={{background:"var(--bg2)",border:"1px solid rgba(212,168,67,.1)",borderRadius:14,padding:24,marginBottom:24}}>
+          <h3 style={{fontFamily:"'Pirata One',cursive",color:"var(--gold)",fontSize:22,marginBottom:16,textAlign:"center"}}>{t.historyTitle}</h3>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:4}}>
+            {getHistory().map((day,i)=>{
+              const d=day.date;
+              const label=`${d.getDate()}/${d.getMonth()+1}`;
+              const bg=day.status==="won"?"var(--correct)":day.status==="lost"?"var(--wrong)":"var(--bg3)";
+              const border=day.status==="won"?"var(--correct-b)":day.status==="lost"?"var(--wrong-b)":"rgba(255,255,255,.04)";
+              const icon=day.status==="won"?"✅":day.status==="lost"?"❌":"·";
+              const isToday=i===29;
+              return(
+                <div key={i} title={`${label} — ${day.status==="won"?t.won2:day.status==="lost"?t.lost2:t.notPlayed}`} style={{
+                  background:bg,border:`1px solid ${border}`,borderRadius:8,padding:"8px 2px",textAlign:"center",
+                  position:"relative",
+                  boxShadow:isToday?"0 0 8px rgba(212,168,67,.3)":"none",
+                }}>
+                  <div style={{fontSize:10,color:"var(--text3)",marginBottom:2}}>{label}</div>
+                  <div style={{fontSize:16}}>{icon}</div>
+                </div>
+              );
+            })}
+          </div>
+          <div style={{display:"flex",gap:16,justifyContent:"center",marginTop:12}}>
+            <div style={{display:"flex",alignItems:"center",gap:5,fontSize:11,color:"var(--text2)"}}>
+              <div style={{width:12,height:12,borderRadius:3,background:"var(--correct)"}}/> {t.won2}
+            </div>
+            <div style={{display:"flex",alignItems:"center",gap:5,fontSize:11,color:"var(--text2)"}}>
+              <div style={{width:12,height:12,borderRadius:3,background:"var(--wrong)"}}/> {t.lost2}
+            </div>
+            <div style={{display:"flex",alignItems:"center",gap:5,fontSize:11,color:"var(--text2)"}}>
+              <div style={{width:12,height:12,borderRadius:3,background:"var(--bg3)",border:"1px solid rgba(255,255,255,.06)"}}/> {t.notPlayed}
+            </div>
+          </div>
         </div>
       </div>
     )}
@@ -299,12 +597,24 @@ export default function App(){
       </div>
     )}
 
+    {/* TOGGLES */}
+    <div style={{marginBottom:16}}>
+      <div className="toggle-row">
+        <div className="toggle-label">⚔️ {t.hardcore} <span className="toggle-sub">({t.hardcoreDesc})</span></div>
+        <button className={`toggle-btn ${hardcore?"on":"off"}`} onClick={()=>setHardcore(p=>!p)}/>
+      </div>
+      <div className="toggle-row">
+        <div className="toggle-label">{soundOn?"🔊":"🔇"} {soundOn?t.soundOn:t.soundOff}</div>
+        <button className={`toggle-btn ${soundOn?"on":"off"}`} onClick={()=>setSoundOn(p=>!p)}/>
+      </div>
+    </div>
+
     {/* INPUT */}
-    {!won&&(
+    {!won&&!lost&&(
       <div style={{position:"relative",marginBottom:24}}>
         <div style={{display:"flex",gap:10}}>
           <div style={{flex:1,position:"relative"}}>
-            <input ref={ref} type="text" value={input}
+            <input ref={inputRef} type="text" value={input}
               onChange={e=>{setInput(e.target.value);setShowSug(true);}}
               onFocus={()=>setShowSug(true)}
               placeholder={t.placeholder}
@@ -327,18 +637,36 @@ export default function App(){
               </div>
             )}
           </div>
-          {guesses.length>=3&&!won&&hintLvl<3&&(
+          {guesses.length>=3&&!won&&!lost&&hintLvl<3&&(
             <button onClick={()=>setHintLvl(p=>Math.min(p+1,3))} style={{background:"rgba(39,174,96,.1)",border:"1px solid rgba(39,174,96,.2)",borderRadius:14,padding:"0 18px",color:"var(--green2)",cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontSize:14,fontWeight:600,whiteSpace:"nowrap"}}>
               💡 {t.hint} ({3-hintLvl})
             </button>
           )}
         </div>
         <div style={{display:"flex",justifyContent:"space-between",marginTop:6,fontSize:12,color:"var(--text3)"}}>
-          <span>{t.attempt}{guesses.length+1}</span>
+          <span>{t.attempt}{guesses.length+1}{hardcore?` · ${t.attemptsLeft.replace("%n",MAX_ATTEMPTS-guesses.length)}`:""}</span>
           <span>↑ {t.higher} · ↓ {t.lower}</span>
         </div>
+        {/* Hardcore progress bar */}
+        {hardcore&&(
+          <div style={{marginTop:8,height:6,background:"var(--bg3)",borderRadius:3,overflow:"hidden"}}>
+            <div style={{height:"100%",width:`${(guesses.length/MAX_ATTEMPTS)*100}%`,background:guesses.length>=MAX_ATTEMPTS-1?"var(--red)":"var(--gold)",borderRadius:3,transition:"width .4s ease"}}/>
+          </div>
+        )}
       </div>
     )}
+
+    {/* CONFETTI */}
+    {showConfetti&&Array.from({length:50}).map((_,i)=>(
+      <div key={i} className="confetti-piece" style={{
+        left:`${Math.random()*100}%`,
+        background:["#f0c850","#e74c3c","#27ae60","#3498db","#9b59b6","#e91e63","#f39c12"][i%7],
+        borderRadius:Math.random()>.5?"50%":"0",
+        width:Math.random()*8+6,height:Math.random()*8+6,
+        animationDelay:`${Math.random()*1.5}s`,
+        animationDuration:`${2+Math.random()*2}s`,
+      }}/>
+    ))}
 
     {/* WIN */}
     {won&&(
@@ -348,6 +676,18 @@ export default function App(){
         <div style={{fontSize:16,marginTop:4}}>{t.wasIt} <strong style={{color:"var(--gold)"}}>{getL(answer.name,lang)}</strong> {t.inAttempts.replace("%n",guesses.length).replace("%s",guesses.length>1?"s":"")}</div>
         <button onClick={shareResult} style={{marginTop:14,background:"var(--gold)",color:"#0a0a0f",border:"none",borderRadius:10,padding:"12px 24px",fontWeight:700,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontSize:15}}>{copied?t.copied:t.share}</button>
         <div style={{marginTop:10,fontSize:13,color:"var(--text2)"}}>🔥 {streak} · ⭐ {bestStreak}</div>
+        {countdown&&<div style={{marginTop:10,fontSize:13,color:"var(--text3)"}}>{t.nextChallenge} <strong style={{color:"var(--gold)",fontFamily:"'Pirata One',cursive",fontSize:18}}>{countdown}</strong></div>}
+      </div>
+    )}
+
+    {/* LOSE (hardcore) */}
+    {lost&&(
+      <div className="su" style={{background:"linear-gradient(135deg,rgba(192,57,43,.12),rgba(192,57,43,.06))",border:"2px solid var(--red)",borderRadius:16,padding:24,textAlign:"center",marginBottom:24}}>
+        <div style={{margin:"0 auto 8px",width:80,height:80,borderRadius:"50%",overflow:"hidden",border:"3px solid var(--red)"}}><Avatar char={answer} size={80}/></div>
+        <div style={{fontFamily:"'Pirata One',cursive",fontSize:28,color:"var(--red)"}}>{t.lost}</div>
+        <div style={{fontSize:16,marginTop:4}}>{t.lostMsg} <strong style={{color:"var(--gold)"}}>{getL(answer.name,lang)}</strong></div>
+        <button onClick={shareResult} style={{marginTop:14,background:"var(--bg3)",color:"var(--text)",border:"1px solid var(--text3)",borderRadius:10,padding:"12px 24px",fontWeight:700,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontSize:15}}>{copied?t.copied:t.share}</button>
+        {countdown&&<div style={{marginTop:10,fontSize:13,color:"var(--text3)"}}>{t.nextChallenge} <strong style={{color:"var(--gold)",fontFamily:"'Pirata One',cursive",fontSize:18}}>{countdown}</strong></div>}
       </div>
     )}
 
@@ -370,10 +710,13 @@ export default function App(){
               const ch=charById(g.charId);
               return(
               <tr key={g.ts||i}>
-                <td className={isLatest?"flip-name":""} style={{...td,background:g.isWin?"var(--correct)":"var(--bg3)",fontWeight:600,color:g.isWin?"var(--gold2)":"var(--text)",borderLeft:g.isWin?"3px solid var(--green2)":"none",whiteSpace:"nowrap"}}>
-                  <div style={{display:"flex",alignItems:"center",gap:8,justifyContent:"center"}}>
-                    {ch&&<Avatar char={ch} size={30}/>}
-                    <span>{g.name}</span>
+                <td className={isLatest?"flip-name":""} style={{...td,background:g.isWin?"var(--correct)":"var(--bg3)",fontWeight:600,color:g.isWin?"var(--gold2)":"var(--text)",borderLeft:g.isWin?"3px solid var(--green2)":"none",whiteSpace:"nowrap",padding:0}}>
+                  <div style={{display:"flex",alignItems:"center",height:"100%"}}>
+                    <div style={{width:52,height:52,flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.2)",borderRadius:"8px 0 0 8px"}}>
+                      {ch&&<Avatar char={ch} size={48}/>}
+                    </div>
+                    <div style={{borderLeft:"2px solid rgba(212,168,67,.2)",height:36,flexShrink:0}}/>
+                    <span style={{padding:"0 12px",fontSize:13}}>{g.name}</span>
                   </div>
                 </td>
                 {g.cols.map((c,j)=>(
@@ -397,6 +740,16 @@ export default function App(){
         </div>
       ))}
       <span style={{fontSize:12,color:"var(--text3)"}}>{t.legend}</span>
+    </div>
+
+    {/* DAILY COUNTER */}
+    <div style={{textAlign:"center",padding:"12px 0",marginTop:4}}>
+      <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(212,168,67,.06)",border:"1px solid rgba(212,168,67,.1)",borderRadius:20,padding:"8px 20px"}}>
+        <span style={{fontSize:18}}>🏴‍☠️</span>
+        <span style={{fontSize:14,color:"var(--gold)"}}>
+          <strong>{Object.keys(dailyWins[mode]||{}).length}</strong> {t.players} {t.todayFound}
+        </span>
+      </div>
     </div>
     </>}
 
